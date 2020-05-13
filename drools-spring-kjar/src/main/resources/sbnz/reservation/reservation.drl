@@ -1,0 +1,13 @@
+package sbnz.reservation;
+
+
+import sbnz.integracija.example.model.Reservation;
+
+
+rule "Classify Item - Low Range"
+    when
+        $r: Reservation( totalPrice <= 300)
+    then
+        $r.setDiscount((double)10);
+        update($r);
+end

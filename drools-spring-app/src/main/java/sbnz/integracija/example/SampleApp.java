@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import sbnz.integracija.example.model.User;
 
 @SpringBootApplication
-@EnableJpaRepositories("repository")
+@EnableJpaRepositories
 public class SampleApp {
 
 	private static Logger log = LoggerFactory.getLogger(SampleApp.class);

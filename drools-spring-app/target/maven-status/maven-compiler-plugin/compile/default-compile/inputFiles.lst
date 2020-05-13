@@ -1,7 +1,13 @@
-D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\SampleApp.java
-D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\model\User.java
-D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\repository\UserRepository.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\model\Accommodation.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\model\User.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\service\RulesService.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\controller\RestEndpoints.java
 D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\SampleAppController.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\model\Reservation.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\repository\ReservationRepository.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\repository\AccommodationRepository.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\SampleApp.java
+D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\repository\UserRepository.java
 D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\facts\Item.java
 D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\SampleAppService.java
 D:\JavaWorkspaces\SBNZ\drools-spring.zip_expanded\drools-spring\drools-spring-app\src\main\java\sbnz\integracija\example\SampleHomeController.java

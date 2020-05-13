@@ -1,5 +1,6 @@
 package sbnz.integracija.example.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,9 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@SuppressWarnings("serial")
 @Entity
-public class Accommodation {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Accommodation implements Serializable {
 	
 	public enum Zone {
         CENTER,NORMAL,SUBURBS
@@ -49,6 +53,16 @@ public class Accommodation {
     @JsonBackReference
     @OneToMany(mappedBy = "accommodation",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Reservation> reservations = new HashSet<>();
+    
+    
+
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
 
 	public Long getId() {
 		return id;

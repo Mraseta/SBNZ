@@ -6,10 +6,13 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+@SuppressWarnings("serial")
 @Entity
-public class Reservation {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Reservation implements Serializable {
 
 	@EmbeddedId
 	private ReservationId id = new ReservationId();
@@ -31,12 +34,30 @@ public class Reservation {
 	private LocalDateTime endDate;
 	
 	@Column(name = "discount")
-	private Long discount;
+	private double discount;
 	
 	@Column(name = "total_price")
-	private Long totalPrice;
+	private double totalPrice;
 	
 	
+	
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Accommodation getAccommodation() {
+		return accommodation;
+	}
+
+	public void setAccommodation(Accommodation accommodation) {
+		this.accommodation = accommodation;
+	}
+
 	public ReservationId getId() {
 		return id;
 	}
@@ -61,19 +82,19 @@ public class Reservation {
 		this.endDate = endDate;
 	}
 
-	public Long getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(Long discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 
-	public Long getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(Long totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
