@@ -10,9 +10,9 @@ insert into sbnz.accommodation(name,country,city,address,zone,owner,price_per_da
 insert into sbnz.accommodation(name,country,city,address,zone,owner,price_per_day,distance_from_center,discount) values ('smestaj6','srbija','novi sad','detelinara6',0,'pera2',130,20,0);
 
 
-insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price) values (1,1,'2020-1-1','2020-2-1',0,0);
-insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price) values (1,2,'2020-1-1','2020-2-1',0,0);
-insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price) values (1,3,'2020-1-1','2020-2-1',0,0);
-insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price) values (1,4,'2020-1-1','2020-2-1',0,0);
-insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price) values (1,5,'2020-1-1','2020-2-1',0,0);
-insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price) values (1,6,'2020-1-1','2020-2-1',0,0);
+insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price,status) values (1,1,'2020-1-1','2020-2-1',0,0,1);
+insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price,status) values (1,2,'2020-1-1','2020-2-1',0,0,1);
+insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price,status) values (1,3,'2020-1-1','2020-2-1',0,0,1);
+insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price,status) values (1,4,'2020-1-1','2020-2-1',0,0,1);
+insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price,status) values (1,5,'2020-1-1','2020-2-1',0,0,1);
+insert into sbnz.reservation(user_id,accommodation_id,start_date,end_date,discount,total_price,status) values (1,6,'2020-1-1','2020-2-1',0,0,1);

@@ -13,6 +13,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Reservation implements Serializable {
+	
+	public enum Status {
+        PENDING,CONFIRMED
+    };
 
 	@EmbeddedId
 	private ReservationId id = new ReservationId();
@@ -39,9 +43,20 @@ public class Reservation implements Serializable {
 	@Column(name = "total_price")
 	private double totalPrice;
 	
+	@Column(name = "status")
+	private Status status;
 	
 	
 	
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	public User getUser() {
 		return user;
 	}
