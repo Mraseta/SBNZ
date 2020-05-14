@@ -29,12 +29,9 @@ public class RestEndpoints {
 	public ResponseEntity<?> getQuestions() {
 		
 				User u = userRepository.getOne(1L);
-				ArrayList<Reservation> reservations = new ArrayList<>();
-				for(Reservation r : u.getReservations()) {
-					reservations.add(rulesService.getClassifiedItem(r));
-				}
+				User u1 = rulesService.setUserCategory(u);
 		
-				return new ResponseEntity<>(u.getReservations(),HttpStatus.ACCEPTED);
+				return new ResponseEntity<>(u1,HttpStatus.ACCEPTED);
 	}
 
 }
