@@ -1,9 +1,13 @@
 package sbnz.integracija.example.service;
 
+import java.util.List;
+
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import sbnz.integracija.example.model.Accommodation;
 import sbnz.integracija.example.model.Reservation;
 import sbnz.integracija.example.model.User;
 
@@ -11,6 +15,7 @@ import sbnz.integracija.example.model.User;
 public class RulesService {
 	
 	private final KieContainer kieContainer;
+	
 	@Autowired
 	public RulesService(KieContainer kieContainer) { this.kieContainer = kieContainer; }
 	
@@ -21,6 +26,7 @@ public class RulesService {
 		kieSession.dispose();
 		return r;
 	}
+	
 	public User setUserCategory(User u) {
 		KieSession kieSession = kieContainer.newKieSession();
 		kieSession.insert(u);
@@ -28,6 +34,17 @@ public class RulesService {
 		kieSession.fireAllRules();
 		kieSession.dispose();
 		return u;
+	}
+	
+	public List<Accommodation> setAccommodationZone(List<Accommodation> a) {
+		KieSession kieSession = kieContainer.newKieSession();
+		for(Accommodation aa : a) {
+			kieSession.insert(aa);
+		}
+		kieSession.getAgenda().getAgendaGroup("accommodation-zone").setFocus();
+		kieSession.fireAllRules();
+		kieSession.dispose();
+		return a;
 	}
 	
 

@@ -1,0 +1,27 @@
+package sbnz.accommodation;
+
+import sbnz.integracija.example.model.Accommodation;
+
+rule "Classify Accommodation - Center"
+	agenda-group "accommodation-zone"
+    when
+        $a: Accommodation(zone == Accommodation.Zone.NA, distanceFromCenter <= 2)
+    then
+        modify($a){setZone(Accommodation.Zone.CENTER);}
+end
+
+rule "Classify Accommodation - Normal"
+	agenda-group "accommodation-zone"
+    when
+        $a: Accommodation(zone == Accommodation.Zone.NA, distanceFromCenter > 2, distanceFromCenter <= 10)
+    then
+        modify($a){setZone(Accommodation.Zone.NORMAL);}
+end
+
+rule "Classify Accommodation - Suburbs"
+	agenda-group "accommodation-zone"
+    when
+        $a: Accommodation(zone == Accommodation.Zone.NA, distanceFromCenter > 10)
+    then
+        modify($a){setZone(Accommodation.Zone.SUBURBS);}
+end

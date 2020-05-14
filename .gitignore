@@ -1,1 +1,3 @@
 /.metadata/
+/drools-spring-app/target
+/drools-spring-kjar/target
