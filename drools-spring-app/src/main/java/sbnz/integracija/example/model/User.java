@@ -21,6 +21,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements Serializable{
 	
+	public enum Category {
+        BRONZE,SILVER,GOLD,PLATINUM
+    };
+	
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,11 +42,22 @@ public class User implements Serializable{
     @Column(name = "last_name")
     private String lastName;
     
+    @Column(name = "category")
+    private Category category;
+    
     @JsonBackReference
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<Reservation> reservations = new HashSet<>();
     
     
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public Set<Reservation> getReservations() {
 		return reservations;

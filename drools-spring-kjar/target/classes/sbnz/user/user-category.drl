@@ -1,0 +1,28 @@
+package sbnz.user;
+
+
+import sbnz.integracija.example.model.User;
+
+rule "Promote user to silver"
+	agenda-group "user-category"
+    when
+        $u: User(reservations.size() >= 3 , reservations.size() < 5)
+    then
+        modify($u) {setCategory(User.Category.SILVER);}
+end
+
+rule "Promote user to gold"
+	agenda-group "user-category"
+    when
+        $u: User(reservations.size() >= 5 , reservations.size() < 10)
+    then
+        modify($u) {setCategory(User.Category.GOLD);}
+end
+
+rule "Promote user to platinum"
+	agenda-group "user-category"
+    when
+        $u: User(reservations.size() >= 10)
+    then
+        modify($u) {setCategory(User.Category.PLATINUM);}
+end

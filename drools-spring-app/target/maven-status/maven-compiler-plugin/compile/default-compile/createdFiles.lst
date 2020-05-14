@@ -5,6 +5,7 @@ sbnz\integracija\example\model\Reservation.class
 sbnz\integracija\example\service\RulesService.class
 sbnz\integracija\example\SampleApp.class
 sbnz\integracija\example\model\Accommodation.class
+sbnz\integracija\example\model\User$Category.class
 sbnz\integracija\example\repository\UserRepository.class
 sbnz\integracija\example\SampleAppService.class
 sbnz\integracija\example\model\Reservation$ReservationId.class
