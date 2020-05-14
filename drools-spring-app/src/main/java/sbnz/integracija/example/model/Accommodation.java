@@ -51,13 +51,23 @@ public class Accommodation implements Serializable {
     private String pricePerDay;
     
     @Column(name = "distance_from_center")
-    private double distanceFromCenter;    
+    private double distanceFromCenter; 
+    
+    @Column(name = "discount")
+    private double discount;
     
 	@JsonBackReference
     @OneToMany(mappedBy = "accommodation",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Reservation> reservations = new HashSet<>();
-    
 	
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
 	public double getDistanceFromCenter() {
 		return distanceFromCenter;
 	}

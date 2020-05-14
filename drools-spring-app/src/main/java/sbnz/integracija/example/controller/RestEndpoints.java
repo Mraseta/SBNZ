@@ -47,5 +47,15 @@ public class RestEndpoints {
 		
 				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
 	}
+	
+	@RequestMapping(value = "/testaccdiscount", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> testaccdiscount() {
+		
+				List<Accommodation> accommodations = accommodationRepository.findAll();
+				User u = userRepository.findOneById(1L);
+				List<Accommodation> ret = rulesService.setAccommodationDiscount(u, accommodations);
+		
+				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
+	}
 
 }
