@@ -48,7 +48,7 @@ public class Accommodation implements Serializable {
     private String owner;
     
     @Column(name = "price_per_day")
-    private String pricePerDay;
+    private double pricePerDay;
     
     @Column(name = "distance_from_center")
     private double distanceFromCenter; 
@@ -141,11 +141,11 @@ public class Accommodation implements Serializable {
 		this.owner = owner;
 	}
 
-	public String getPricePerDay() {
+	public double getPricePerDay() {
 		return pricePerDay;
 	}
 
-	public void setPricePerDay(String pricePerDay) {
+	public void setPricePerDay(double pricePerDay) {
 		this.pricePerDay = pricePerDay;
 	}
     

@@ -1,7 +1,10 @@
 package sbnz.integracija.example.service;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
+import org.apache.tomcat.jni.Local;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +77,31 @@ public class RulesService {
 		kieSession.fireAllRules();
 		kieSession.dispose();
 		return accommodations;
+		
+	}
+	public Reservation setReservationPrice(User u,Accommodation a,List<Reservation> reservations) {
+		
+		Reservation r = new Reservation();
+		r.setUser(u);
+		r.setAccommodation(a);
+		LocalDateTime start = LocalDateTime.of(2020, Month.JANUARY, 30, 0, 0);
+		LocalDateTime end = LocalDateTime.of(2020, Month.FEBRUARY, 10, 0, 0);
+
+		r.setStartDate(start);
+		r.setEndDate(end);
+		r.setStatus(Reservation.Status.PENDING);
+		
+		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.insert(u);
+		kieSession.insert(a);
+		kieSession.insert(r);
+		kieSession.insert(reservations);
+		kieSession.getAgenda().getAgendaGroup("reservation-price").setFocus();
+		kieSession.fireAllRules();
+		kieSession.dispose();
+		return r;
+		
+		
 		
 	}
 	

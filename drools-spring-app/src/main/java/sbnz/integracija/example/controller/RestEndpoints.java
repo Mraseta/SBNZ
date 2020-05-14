@@ -14,6 +14,7 @@ import sbnz.integracija.example.model.Accommodation;
 import sbnz.integracija.example.model.Reservation;
 import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.repository.AccommodationRepository;
+import sbnz.integracija.example.repository.ReservationRepository;
 import sbnz.integracija.example.repository.UserRepository;
 import sbnz.integracija.example.service.RulesService;
 
@@ -26,6 +27,9 @@ public class RestEndpoints {
 	
 	@Autowired
 	AccommodationRepository accommodationRepository;
+	
+	@Autowired
+	ReservationRepository reservationRepository;
 	
 	@Autowired
 	RulesService rulesService;
@@ -57,5 +61,19 @@ public class RestEndpoints {
 		
 				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
 	}
+	
+	@RequestMapping(value = "/testresprice", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> testresprice() {
+		
+				List<Accommodation> accommodations = accommodationRepository.findAll();
+				User u = userRepository.findOneById(1L);
+				
+				Accommodation a = accommodationRepository.findOneById(1L); //ovo ce dolaziti sa fronta pa je ok cena.
+				List<Reservation> reservations = reservationRepository.findAll();
+				Reservation ret = rulesService.setReservationPrice(u, a, reservations);
+		
+				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
+	}
+	
 
 }

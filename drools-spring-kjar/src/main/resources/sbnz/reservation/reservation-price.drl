@@ -1,0 +1,17 @@
+package sbnz.reservation;
+
+
+import sbnz.integracija.example.model.Reservation;
+import sbnz.integracija.example.model.User;
+import sbnz.integracija.example.model.Accommodation;
+
+
+rule "calculate price based on duration of reservation"
+	when
+        $r: Reservation(status == Reservation.Status.PENDING,start : startDate.getDayOfYear(), endd : endDate.getDayOfYear())
+        $a: Accommodation(price : pricePerDay)
+    then
+        
+        modify($r){setTotalPrice((endd-start)*price);}
+        modify($r){setStatus(Reservation.Status.CONFIRMED);}
+end

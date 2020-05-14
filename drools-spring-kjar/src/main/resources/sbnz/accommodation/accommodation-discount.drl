@@ -8,9 +8,9 @@ rule "Apply discount 3%"
 	lock-on-active true
     when
     	$u: User(category == User.Category.SILVER)
-        $a: Accommodation()
+        $a: Accommodation(price : pricePerDay)
     then
-        modify($a){setDiscount((double)3)}
+        modify($a){setPricePerDay(price*0.97);}
 end
 
 
@@ -19,9 +19,9 @@ rule "Apply discount 5%"
 	lock-on-active true
     when
     	$u: User(category == User.Category.GOLD)
-        $a: Accommodation()
+        $a: Accommodation(price : pricePerDay)
     then
-        modify($a){setDiscount((double)5)}
+        modify($a){setPricePerDay(price*0.95);}
 end
 
 
@@ -30,7 +30,7 @@ rule "Apply discount 10%"
 	lock-on-active true
     when
     	$u: User(category == User.Category.PLATINUM)
-        $a: Accommodation()
+        $a: Accommodation(price : pricePerDay)
     then
-        modify($a){setDiscount((double)10)}
+        modify($a){setPricePerDay(price*0.90);}
 end
