@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Accommodation implements Serializable {
 	
 	public enum Zone {
-        CENTER,NORMAL,SUBURBS
+        NA,CENTER,NORMAL,SUBURBS
     };
 	
 	@Id
@@ -50,11 +50,22 @@ public class Accommodation implements Serializable {
     @Column(name = "price_per_day")
     private String pricePerDay;
     
-    @JsonBackReference
+    @Column(name = "distance_from_center")
+    private double distanceFromCenter;    
+    
+	@JsonBackReference
     @OneToMany(mappedBy = "accommodation",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     Set<Reservation> reservations = new HashSet<>();
     
-    
+	
+	public double getDistanceFromCenter() {
+		return distanceFromCenter;
+	}
+
+	public void setDistanceFromCenter(double distanceFromCenter) {
+		this.distanceFromCenter = distanceFromCenter;
+	}
+
 
 	public Set<Reservation> getReservations() {
 		return reservations;
