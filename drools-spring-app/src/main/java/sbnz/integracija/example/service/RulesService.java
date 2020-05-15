@@ -17,6 +17,7 @@ import sbnz.integracija.example.repository.AccommodationRepository;
 import sbnz.integracija.example.repository.ReservationRepository;
 import sbnz.integracija.example.repository.UserRepository;
 
+
 @Service
 public class RulesService {
 	
@@ -95,10 +96,19 @@ public class RulesService {
 		kieSession.insert(u);
 		kieSession.insert(a);
 		kieSession.insert(r);
-		kieSession.insert(reservations);
+		int i= 0;
+		for(Reservation rr : reservations) {
+			if(rr.getAccommodation().getOwner().equals(a.getOwner())) {
+				i++;
+				
+			}
+		}
+		System.out.println("Broj poseta " + i);
+		kieSession.setGlobal("visits", i);
 		kieSession.getAgenda().getAgendaGroup("reservation-price").setFocus();
 		kieSession.fireAllRules();
 		kieSession.dispose();
+		reservationRepository.save(r);
 		return r;
 		
 		
