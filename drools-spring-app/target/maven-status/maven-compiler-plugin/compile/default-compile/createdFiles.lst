@@ -9,7 +9,6 @@ sbnz\integracija\example\model\User$Category.class
 sbnz\integracija\example\repository\UserRepository.class
 sbnz\integracija\example\SampleAppService.class
 sbnz\integracija\example\model\Reservation$Status.class
-sbnz\integracija\example\model\Reservation$ReservationId.class
 sbnz\integracija\example\model\Accommodation$Zone.class
 sbnz\integracija\example\SampleAppController.class
 sbnz\integracija\example\controller\RestEndpoints.class

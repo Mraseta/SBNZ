@@ -18,17 +18,16 @@ public class Reservation implements Serializable {
         PENDING,CONFIRMED
     };
 
-	@EmbeddedId
-	private ReservationId id = new ReservationId();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 	
 	@JsonManagedReference
-    @ManyToOne
-    @MapsId("user_id")
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private User user;
 
     @JsonManagedReference
-    @ManyToOne
-    @MapsId("accommodation_id")
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Accommodation accommodation;
 	
 	@Column(name = "start_date")
@@ -49,6 +48,14 @@ public class Reservation implements Serializable {
 	
 	
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Status getStatus() {
 		return status;
 	}
@@ -71,14 +78,6 @@ public class Reservation implements Serializable {
 
 	public void setAccommodation(Accommodation accommodation) {
 		this.accommodation = accommodation;
-	}
-
-	public ReservationId getId() {
-		return id;
-	}
-
-	public void setId(ReservationId id) {
-		this.id = id;
 	}
 
 	public LocalDateTime getStartDate() {
@@ -113,61 +112,5 @@ public class Reservation implements Serializable {
 		this.totalPrice = totalPrice;
 	}
 
-	@Embeddable
-	public static class ReservationId implements Serializable {
-
-		private static final long serialVersionUID = 1L;
-
-		private Long user_id;
-		private Long accommodation_id;
-
-		public ReservationId() {
-
-		}
-
-		public ReservationId(Long user_id, Long accommodation_id) {
-			super();
-			this.user_id = user_id;
-			this.accommodation_id = accommodation_id;
-		}
-
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((user_id == null) ? 0 : user_id.hashCode());
-			result = prime * result + ((accommodation_id == null) ? 0 : accommodation_id.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			ReservationId other = (ReservationId) obj;
-			return Objects.equals(getAccommodation_id(), other.getAccommodation_id())
-					&& Objects.equals(getUser_id(), other.getUser_id());
-		}
-
-		public Long getUser_id() {
-			return user_id;
-		}
-
-		public void setUser_id(Long user_id) {
-			this.user_id = user_id;
-		}
-
-		public Long getAccommodation_id() {
-			return accommodation_id;
-		}
-
-		public void setAccommodation_id(Long accommodation_id) {
-			this.accommodation_id = accommodation_id;
-		}
-
-	}
+	
 }

@@ -4,14 +4,52 @@ package sbnz.reservation;
 import sbnz.integracija.example.model.Reservation;
 import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.model.Accommodation;
+import java.util.*;
 
+global Integer visits;
 
 rule "calculate price based on duration of reservation"
+	agenda-group "reservation-price"
 	when
         $r: Reservation(status == Reservation.Status.PENDING,start : startDate.getDayOfYear(), endd : endDate.getDayOfYear())
         $a: Accommodation(price : pricePerDay)
     then
-        
+        System.out.println("dosao");
         modify($r){setTotalPrice((endd-start)*price);}
         modify($r){setStatus(Reservation.Status.CONFIRMED);}
+end
+
+rule "calculate discount based on number of stays at this particular owner if stays are more than 3 and less than 7 and apply 5% discount"
+	agenda-group "reservation-price"
+	when
+		$r: Reservation($totalPrice : totalPrice) @Watch(!*,status)
+		$a: Accommodation($owner : owner)
+		$reservations: List() from collect (Reservation( accommodation.owner == $a.owner ))
+		eval(visits >= 3)
+		eval(visits < 7)
+	then 
+		modify($r){setTotalPrice($totalPrice*0.95)}
+end
+
+rule "calculate discount based on number of stays at this particular owner if stays are more than 7 and less than 10 and apply 10% discount"
+	agenda-group "reservation-price"
+	when
+		$r: Reservation($totalPrice : totalPrice) @Watch(!*,status)
+		$a: Accommodation($owner : owner)
+		$reservations: List() from collect (Reservation( accommodation.owner == $a.owner ))
+		eval(visits >= 7)
+		eval(visits < 10)
+	then 
+		modify($r){setTotalPrice($totalPrice*0.90)}
+end
+
+rule "calculate discount based on number of stays at this particular owner if stays are more than 10 apply 15% discount"
+	agenda-group "reservation-price"
+	when
+		$r: Reservation($totalPrice : totalPrice) @Watch(!*,status)
+		$a: Accommodation($owner : owner)
+		$reservations: List() from collect (Reservation( accommodation.owner == $a.owner ))
+		eval(visits >= 10)
+	then 
+		modify($r){setTotalPrice($totalPrice*0.85)}
 end

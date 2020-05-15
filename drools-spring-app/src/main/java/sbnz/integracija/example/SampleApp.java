@@ -14,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import sbnz.integracija.example.model.User;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -25,6 +24,7 @@ public class SampleApp {
 	 
 
 	public static void main(String[] args) {
+		System.out.println("pokrecem");
 		ApplicationContext ctx = SpringApplication.run(SampleApp.class, args);
 
 		String[] beanNames = ctx.getBeanDefinitionNames();
