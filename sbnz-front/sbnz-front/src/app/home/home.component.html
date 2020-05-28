@@ -1,1 +1,8 @@
-<p>home works!</p>
+<input type="text" placeholder="Country" name="country" [(ngModel)]="country">
+<input type="text" placeholder="City" name="country" [(ngModel)]="city">
+<select [(ngModel)]="zone">
+    <option *ngFor="let c of zones" [ngValue]="c">{{c.name}}</option>
+  </select>
+<input type="text" placeholder="Min price per day" name="priceperdaymin" [(ngModel)]="pricePerDayMin">
+<input type="text" placeholder="Max price per day" name="priceperdaymax" [(ngModel)]="pricePerDayMax">
+<button class="btn btn-primary" (click)="search()">Search</button>
