@@ -59,11 +59,14 @@ public class RulesService {
 		KieSession kieSession = kieContainer.newKieSession();
 		for(Accommodation a : accommodations) {
 			kieSession.insert(a);
-			accommodationRepository.save(a);
+			
 		}
 		kieSession.getAgenda().getAgendaGroup("accommodation-zone").setFocus();
 		kieSession.fireAllRules();
 		kieSession.dispose();
+		for(Accommodation a: accommodations) {
+			accommodationRepository.save(a);
+		}
 		return accommodations;
 	}
 	
