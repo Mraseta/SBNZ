@@ -21,13 +21,14 @@ public class AuthneticationController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST,consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> testusercat(@RequestBody UserDTO user) {
 			User u = userRepository.findOneByUsername(user.username);
+			if(u == null) {
+				return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST); //status 400
+			}
 			if(!u.getPassword().equals(user.password)) {
 				return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST); //status 400
 				
 			}else {
-				user.firstName = u.getFirstName();
-				user.lastName = u.getLastName();
-				return new ResponseEntity<>(user,HttpStatus.ACCEPTED);
+				return new ResponseEntity<>(u,HttpStatus.ACCEPTED);
 			}
 		
 				
