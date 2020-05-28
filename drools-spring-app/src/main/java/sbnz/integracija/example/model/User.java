@@ -24,6 +24,10 @@ public class User implements Serializable{
 	public enum Category {
         BRONZE,SILVER,GOLD,PLATINUM
     };
+    
+    public enum Type {
+    	USER,OWNER,ADMIN
+    };
 	
 	
 	@Id
@@ -45,11 +49,20 @@ public class User implements Serializable{
     @Column(name = "category")
     private Category category;
     
+    @Column(name = "type")
+    private Type type;
+    
     @JsonBackReference
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     Set<Reservation> reservations = new HashSet<>();
     
-    
+    public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
 
 	public Category getCategory() {
 		return category;
