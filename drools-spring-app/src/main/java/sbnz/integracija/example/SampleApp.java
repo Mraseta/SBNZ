@@ -24,18 +24,7 @@ public class SampleApp {
 	 
 
 	public static void main(String[] args) {
-		System.out.println("pokrecem");
 		ApplicationContext ctx = SpringApplication.run(SampleApp.class, args);
-
-		String[] beanNames = ctx.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
-		
-
-		/*
-		 * StringBuilder sb = new StringBuilder("Application beans:\n"); for (String
-		 * beanName : beanNames) { sb.append(beanName + "\n"); }
-		 * log.info(sb.toString());
-		 */
 	}
 
 	@Bean
