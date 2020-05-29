@@ -37,10 +37,12 @@ public class SearchController {
 		User u = userRepository.findOneById(id);
 		Accommodation.Zone zoneEnum = null;
 		
-		//CENTER,NORMAL,SUBURBS
+		//NA,CENTER,NORMAL,SUBURBS
 		if(zone == 0) {
-			zoneEnum =Accommodation.Zone.CENTER;
+			zoneEnum = null;
 		}else if(zone == 1) {
+			zoneEnum = Accommodation.Zone.CENTER;
+		}else if(zone == 2) {
 			zoneEnum = Accommodation.Zone.NORMAL;
 		}else {
 			zoneEnum = Accommodation.Zone.SUBURBS;
