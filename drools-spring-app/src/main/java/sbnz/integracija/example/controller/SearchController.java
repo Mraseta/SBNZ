@@ -53,7 +53,7 @@ public class SearchController {
 			if (!a.getCountry().equals(country) && !country.equals("")) {
 				continue;
 			}
-			if (!a.getZone().equals(zoneEnum)) {
+			if (!(a.getZone() == zoneEnum)) {
 				continue;
 			}
 			if(a.getPricePerDay() > pricePerDayMax) {

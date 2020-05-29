@@ -14,15 +14,6 @@ export class HomeComponent implements OnInit {
   pricePerDayMax: number;
   id: number;
 
-  countries = [
-    {id: "United States", name: "United States"},
-    {id: "Australia", name: "Australia"},
-    {id: "Canada", name: "Canada"},
-    {id: "Brazil", name: "Brazil"},
-    {id: "England", name: "England"},
-    {id: "Serbia", name: "Serbia"}
-  ];
-
   zones = [
     {id: 0, name: "Center"},
     {id: 1, name: "Normal"},
