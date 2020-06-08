@@ -10,25 +10,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.repository.UserRepository;
+import sbnz.integracija.example.service.RulesService;
 
-@RestController()
+@RestController
 @RequestMapping(value = "auth")
 public class AuthneticationController {
 	
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	RulesService rulesService;
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST,consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> testusercat(@RequestBody UserDTO user) {
 			User u = userRepository.findOneByUsername(user.username);
 			if(u == null) {
-				return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST); //status 400
+				return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST); 
 			}
 			if(!u.getPassword().equals(user.password)) {
-				return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST); //status 400
+				return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST); 
 				
 			}else {
-				return new ResponseEntity<>(u,HttpStatus.ACCEPTED);
+				User u1 = rulesService.setUserCategory(u);
+				return new ResponseEntity<>(u1,HttpStatus.ACCEPTED);
 			}
 		
 				
