@@ -1,0 +1,60 @@
+package sbnz.cep;
+
+import sbnz.integracija.example.model.Reservation;
+
+rule "More than 2 reservations in 10 minutes from one client"
+    when
+        $r1: Reservation($cId: user.getId())
+        Number(intValue > 2) from accumulate(
+            $r2: Reservation(
+                this != $r1, 
+                user.getId() == $cId, 
+                this meets[10m] $r1
+            ),
+            count($r2)
+        )
+    then
+        System.out.println("aaaa");
+end
+
+rule "New reservation - promote to Silver"
+	salience 10
+	when
+		$r1: Reservation($user: user)
+		Number(intValue >= 3) from accumulate(
+			$r2: Reservation(
+				this != $r1,
+				user.getId() == $user.getId()
+			),
+			count($r2)
+		)
+	then
+		modify($user) {setCategory(User.Category.SILVER);}
+
+rule "New reservation - promote to Gold"
+	salience 5
+	when
+		$r1: Reservation($user: user)
+		Number(intValue >= 5) from accumulate(
+			$r2: Reservation(
+				this != $r1,
+				user.getId() == $user.getId()
+			),
+			count($r2)
+		)
+	then
+		modify($user) {setCategory(User.Category.GOLD);}
+		
+rule "New reservation - promote to Platinum"
+	salience 2
+	when
+		$r1: Reservation($user: user)
+		Number(intValue >= 10) from accumulate(
+			$r2: Reservation(
+				this != $r1,
+				user.getId() == $user.getId()
+			),
+			count($r2)
+		)
+	then
+		modify($user) {setCategory(User.Category.PLATINUM);}		

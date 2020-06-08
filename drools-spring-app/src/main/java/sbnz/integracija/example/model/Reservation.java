@@ -6,12 +6,17 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import org.drools.devguide.eshop.events.Expires;
+import org.drools.devguide.eshop.events.Role;
+import org.drools.devguide.eshop.events.Timestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @SuppressWarnings("serial")
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@org.kie.api.definition.type.Role(org.kie.api.definition.type.Role.Type.EVENT)
 public class Reservation implements Serializable {
 	
 	public enum Status {
