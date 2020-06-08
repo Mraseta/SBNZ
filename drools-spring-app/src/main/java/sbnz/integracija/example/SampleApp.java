@@ -1,22 +1,26 @@
 package sbnz.integracija.example;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+
 
 
 @SpringBootApplication
 @EnableJpaRepositories
+@EnableScheduling
 public class SampleApp {
 
 	private static Logger log = LoggerFactory.getLogger(SampleApp.class);
@@ -25,6 +29,7 @@ public class SampleApp {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SampleApp.class, args);
+		
 	}
 
 	@Bean

@@ -83,13 +83,20 @@ public class RulesService {
 		return accommodations;
 		
 	}
-	public Reservation setReservationPrice(User u,Accommodation a,List<Reservation> reservations) {
+	public Reservation setReservationPrice(User u,Accommodation a,List<Reservation> reservations,String startDate,String endDate) {
 		
 		Reservation r = new Reservation();
 		r.setUser(u);
 		r.setAccommodation(a);
-		LocalDateTime start = LocalDateTime.of(2020, Month.JANUARY, 30, 0, 0);
-		LocalDateTime end = LocalDateTime.of(2020, Month.FEBRUARY, 10, 0, 0);
+		
+		int startYear = Integer.parseInt(startDate.split("-")[0]);
+		int startMonth = Integer.parseInt(startDate.split("-")[1]);
+		int startDay = Integer.parseInt(startDate.split("-")[2]);
+		int endYear = Integer.parseInt(endDate.split("-")[0]);
+		int endMonth = Integer.parseInt(endDate.split("-")[1]);
+		int endDay = Integer.parseInt(endDate.split("-")[2]);
+		LocalDateTime start = LocalDateTime.of(startYear, startMonth, startDay, 0, 0);
+		LocalDateTime end = LocalDateTime.of(endYear, endMonth,endDay, 0, 0);
 
 		r.setStartDate(start);
 		r.setEndDate(end);

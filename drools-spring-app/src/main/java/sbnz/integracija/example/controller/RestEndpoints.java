@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,18 +62,14 @@ public class RestEndpoints {
 		
 				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
 	}
-	
-	@RequestMapping(value = "/testresprice", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> testresprice() {
-		
-				List<Accommodation> accommodations = accommodationRepository.findAll();
-				User u = userRepository.findOneById(1L);
-				
-				Accommodation a = accommodationRepository.findOneById(1L); //ovo ce dolaziti sa fronta pa je ok cena.
-				List<Reservation> reservations = reservationRepository.findAll();
-				Reservation ret = rulesService.setReservationPrice(u, a, reservations);
-		
-				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
+
+	@Scheduled(initialDelay = 1000,fixedRate = 1000000)
+	public void scheduleFixedRateWithInitialDelayTask() {
+	  
+		List<Accommodation> accommodations = accommodationRepository.findAll();
+		List<Accommodation> ret = rulesService.setAccommodationZone(accommodations);
+	    System.out.println(
+	      "Fixed rate task with one second initial delay - MRS");
 	}
 	
 
