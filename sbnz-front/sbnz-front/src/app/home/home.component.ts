@@ -15,9 +15,10 @@ export class HomeComponent implements OnInit {
   id: number;
 
   zones = [
-    {id: 0, name: "Center"},
-    {id: 1, name: "Normal"},
-    {id: 2, name: "Suburbs"}
+    {id: 0, name: ""},
+    {id: 1, name: "Center"},
+    {id: 2, name: "Normal"},
+    {id: 3, name: "Suburbs"}
   ];
 
   constructor(private searchService: SearchService) { }
