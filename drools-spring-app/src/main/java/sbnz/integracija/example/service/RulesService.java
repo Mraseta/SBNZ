@@ -47,6 +47,10 @@ public class RulesService {
 	
 	public User setUserCategory(User u) {
 		KieSession kieSession = kieContainer.newKieSession();
+		List<Reservation> reservations = reservationRepository.findAll();
+		for(Reservation r : reservations) {
+			kieSession.insert(r);
+		}
 		kieSession.insert(u);
 		kieSession.getAgenda().getAgendaGroup("user-category").setFocus();
 		kieSession.fireAllRules();
@@ -68,6 +72,20 @@ public class RulesService {
 			accommodationRepository.save(a);
 		}
 		return accommodations;
+	}
+	
+	public Accommodation setAccommodationZone(Accommodation a) {
+		KieSession kieSession = kieContainer.newKieSession();
+		
+			kieSession.insert(a);
+			
+		
+		kieSession.getAgenda().getAgendaGroup("accommodation-zone").setFocus();
+		kieSession.fireAllRules();
+		kieSession.dispose();
+		accommodationRepository.save(a);
+		return a;
+		
 	}
 	
 	public List<Accommodation> setAccommodationDiscount(User u,List<Accommodation> accommodations) {
