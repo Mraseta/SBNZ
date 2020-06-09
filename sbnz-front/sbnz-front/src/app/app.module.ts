@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { ApproveReservationsComponent } from './approve-reservations/approve-reservations.component';
+import { NewRuleComponent } from './new-rule/new-rule.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ApproveReservationsComponent } from './approve-reservations/approve-res
     HomeComponent,
     RegisterComponent,
     CreateAccommodationComponent,
-    ApproveReservationsComponent
+    ApproveReservationsComponent,
+    NewRuleComponent
   ],
   imports: [
     BrowserModule,

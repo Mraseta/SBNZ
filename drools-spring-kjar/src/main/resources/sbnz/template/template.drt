@@ -1,0 +1,22 @@
+template header
+minRes
+maxRes
+newCategory
+
+package sbnz.template;
+
+import sbnz.integracija.example.model.User;
+
+template "user-category-rules"
+
+rule "Categorize Users_@{newCategory}"
+no-loop true
+when
+	$u: User(reservations.size() >= @{minRes},
+			reservations.size() <= @{maxRes},
+			category != User.Category.@{newCategory})
+then
+	modify ($u){ setCategory(User.Category.@{newCategory})};
+end
+
+end template
