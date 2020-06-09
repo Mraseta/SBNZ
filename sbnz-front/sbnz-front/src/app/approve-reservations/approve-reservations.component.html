@@ -1,0 +1,7 @@
+<div class="reservations" *ngFor="let res of confirmedRes">
+    <div>{{ res.user.username }}</div>
+    <div>{{ res.accommodation.name }}</div>
+    <div>{{ res.startDate[2] }} {{ res.startDate[1] }} {{ res.startDate[0] }}</div>
+    <div>{{ res.endDate[2] }} {{ res.endDate[1] }} {{ res.endDate[0] }}</div>
+    <div><button class="btn btn-primary" (click)="approveReservation(res.id)">Approve</button></div>
+</div>

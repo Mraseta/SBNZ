@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
+import { ApproveReservationsComponent } from './approve-reservations/approve-reservations.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    CreateAccommodationComponent
+    CreateAccommodationComponent,
+    ApproveReservationsComponent
   ],
   imports: [
     BrowserModule,

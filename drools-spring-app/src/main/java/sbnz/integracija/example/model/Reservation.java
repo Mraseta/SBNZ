@@ -2,7 +2,6 @@ package sbnz.integracija.example.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -16,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Reservation implements Serializable {
 	
 	public enum Status {
-        PENDING,CONFIRMED,RESERVED
+        PENDING, CONFIRMED, RESERVED
     };
 
     @Id
