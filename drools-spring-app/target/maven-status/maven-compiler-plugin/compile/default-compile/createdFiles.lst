@@ -2,6 +2,7 @@ sbnz\integracija\example\model\Reservation.class
 sbnz\integracija\example\model\User$Type.class
 sbnz\integracija\example\controller\SearchController.class
 sbnz\integracija\example\controller\AuthneticationController.class
+sbnz\integracija\example\controller\ReserveController.class
 sbnz\integracija\example\repository\UserRepository.class
 sbnz\integracija\example\controller\AuthneticationController$UserDTO.class
 sbnz\integracija\example\SampleAppService.class
@@ -16,6 +17,7 @@ sbnz\integracija\example\model\Accommodation.class
 sbnz\integracija\example\config\cors.class
 sbnz\integracija\example\model\User$Category.class
 sbnz\integracija\example\model\Reservation$Status.class
+sbnz\integracija\example\controller\ReserveController$ReserveDTO.class
 sbnz\integracija\example\model\Accommodation$Zone.class
 sbnz\integracija\example\model\User.class
 sbnz\integracija\example\repository\AccommodationRepository.class
