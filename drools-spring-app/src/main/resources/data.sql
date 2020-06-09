@@ -1,6 +1,6 @@
-insert into sbnz.user (username, password,first_name,last_name,category,type) values ('user', '123','nikola','roncevic',0,0);
-insert into sbnz.user (username, password,first_name,last_name,category,type) values ('owner', '123','marko','markovic',0,1);
-insert into sbnz.user (username, password,first_name,last_name,category,type) values ('admin', '123','stipe','stipevic',0,2);
+insert into sbnz.user (username, password,first_name,last_name,category,type,status) values ('user', '123','nikola','roncevic',0,0,0);
+insert into sbnz.user (username, password,first_name,last_name,category,type,status) values ('owner', '123','marko','markovic',0,1,0);
+insert into sbnz.user (username, password,first_name,last_name,category,type,status) values ('admin', '123','stipe','stipevic',0,2,0);
 
 insert into sbnz.accommodation(name,country,city,address,zone,owner,price_per_day,distance_from_center,discount) values ('smestaj1','srbija','novi sad','detelinara1',0,'owner',100,1,0);
 insert into sbnz.accommodation(name,country,city,address,zone,owner,price_per_day,distance_from_center,discount) values ('smestaj2','srbija','novi sad','detelinara2',0,'owner',150,2,0);
