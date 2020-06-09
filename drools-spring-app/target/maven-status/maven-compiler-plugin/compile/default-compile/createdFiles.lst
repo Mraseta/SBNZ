@@ -1,5 +1,7 @@
-sbnz\integracija\example\controller\RestEndpoints$NewRule.class
+sbnz\integracija\example\controller\AccommodationController$AccommodationDTO.class
 sbnz\integracija\example\model\Reservation.class
+sbnz\integracija\example\model\User$Status.class
+sbnz\integracija\example\service\UserService.class
 sbnz\integracija\example\model\User$Type.class
 sbnz\integracija\example\controller\SearchController.class
 sbnz\integracija\example\controller\AuthneticationController.class
@@ -7,6 +9,8 @@ sbnz\integracija\example\controller\ReserveController.class
 sbnz\integracija\example\repository\UserRepository.class
 sbnz\integracija\example\controller\AuthneticationController$UserDTO.class
 sbnz\integracija\example\SampleAppService.class
+sbnz\integracija\example\service\AccommodationService.class
+sbnz\integracija\example\service\ReservationService.class
 sbnz\integracija\example\SampleAppController.class
 sbnz\integracija\example\controller\RestEndpoints.class
 sbnz\integracija\example\repository\ReservationRepository.class
@@ -16,8 +20,13 @@ sbnz\integracija\example\service\RulesService.class
 sbnz\integracija\example\SampleApp.class
 sbnz\integracija\example\model\Accommodation.class
 sbnz\integracija\example\config\cors.class
+sbnz\integracija\example\controller\NewRuleController$NewRule.class
 sbnz\integracija\example\model\User$Category.class
+sbnz\integracija\example\event\ReservationEvent.class
 sbnz\integracija\example\model\Reservation$Status.class
+sbnz\integracija\example\service\CepService.class
+sbnz\integracija\example\controller\AccommodationController.class
+sbnz\integracija\example\controller\NewRuleController.class
 sbnz\integracija\example\controller\ReserveController$ReserveDTO.class
 sbnz\integracija\example\model\Accommodation$Zone.class
 sbnz\integracija\example\controller\ReserveController$Id.class
