@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RuleService } from '../services/rule.service';
 
 @Component({
   selector: 'app-new-rule',
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-rule.component.css']
 })
 export class NewRuleComponent implements OnInit {
+  silver = "";
+  gold = "";
+  platinum = "";
 
-  constructor() { }
+  constructor(private ruleService: RuleService) { }
 
   ngOnInit() {
+  }
+
+  newRule() {
+    this.ruleService.newRule(this.silver, this.gold, this.platinum)
+    .subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    )
   }
 
 }

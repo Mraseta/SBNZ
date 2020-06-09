@@ -5,15 +5,16 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { ApproveReservationsComponent } from './approve-reservations/approve-reservations.component';
+import { NewRuleComponent } from './new-rule/new-rule.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path : 'create-accommodation',component : CreateAccommodationComponent},
-  { path: 'approve', component: ApproveReservationsComponent }
-
+  { path: 'create-accommodation', component: CreateAccommodationComponent },
+  { path: 'approve', component: ApproveReservationsComponent },
+  { path: 'new-rule', component: NewRuleComponent }
 ];
 
 @NgModule({

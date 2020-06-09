@@ -1,1 +1,18 @@
-<p>new-rule works!</p>
+<table>
+    <tr>
+        <td>Minimum reservations for Silver: </td>
+        <td><input type="text" [(ngModel)]="silver"/></td>
+    </tr>
+    <tr>
+        <td>Minimum reservations for Gold: </td>
+        <td><input type="text" [(ngModel)]="gold"/></td>
+    </tr>
+    <tr>
+        <td>Minimum reservations for Platinum: </td>
+        <td><input type="text" [(ngModel)]="platinum"/></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><button class="btn btn-primary" (click)="newRule()">Send</button></td>
+    </tr>
+</table>
