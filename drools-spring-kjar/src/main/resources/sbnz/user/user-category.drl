@@ -2,27 +2,52 @@ package sbnz.user;
 
 
 import sbnz.integracija.example.model.User;
+import sbnz.integracija.example.model.Reservation;
 
 rule "Promote user to silver"
 	agenda-group "user-category"
+	salience 20
     when
-        $u: User(reservations.size() >= 3 , reservations.size() < 5)
+        $u: User(category == User.Category.BRONZE)
+        Number(intValue >= 3) from accumulate(
+			$r2: Reservation(
+				user.getId() == $u.getId(),
+				status == Reservation.Status.RESERVED
+			),
+			count($r2)
+		)
     then
         modify($u) {setCategory(User.Category.SILVER);}
 end
 
 rule "Promote user to gold"
 	agenda-group "user-category"
+	salience 15
     when
-        $u: User(reservations.size() >= 5 , reservations.size() < 10)
+        $u: User(category == User.Category.SILVER)
+         Number(intValue >= 6) from accumulate(
+			$r2: Reservation(
+				user.getId() == $u.getId(),
+				status == Reservation.Status.RESERVED
+			),
+			count($r2)
+		)
     then
         modify($u) {setCategory(User.Category.GOLD);}
 end
 
 rule "Promote user to platinum"
 	agenda-group "user-category"
+	salience 10
     when
-        $u: User(reservations.size() >= 10)
+        $u: User(category == User.Category.GOLD)
+         Number(intValue >= 10) from accumulate(
+			$r2: Reservation(
+				user.getId() == $u.getId(),
+				status == Reservation.Status.RESERVED
+			),
+			count($r2)
+		)
     then
         modify($u) {setCategory(User.Category.PLATINUM);}
 end

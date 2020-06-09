@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Reservation implements Serializable {
 	
 	public enum Status {
-        PENDING,CONFIRMED
+        PENDING,CONFIRMED,RESERVED
     };
 
     @Id

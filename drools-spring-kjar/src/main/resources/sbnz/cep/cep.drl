@@ -21,7 +21,8 @@ end
 rule "New reservation - promote to Silver"
 	salience 10
 	when
-		$r1: Reservation($user: user)
+		$r1: Reservation($user: user,status == Reservation.Status.RESERVED)
+		$user(category == User.Category.BRONZE)
 		Number(intValue >= 3) from accumulate(
 			$r2: Reservation(
 				this != $r1,
@@ -37,7 +38,8 @@ end
 rule "New reservation - promote to Gold"
 	salience 5
 	when
-		$r1: Reservation($user: user,status == Reservation.Status.PENDING)
+		$r1: Reservation($user: user,status == Reservation.Status.RESERVED)
+		$user(category == User.Category.SILVER)
 		Number(intValue >= 5) from accumulate(
 			$r2: Reservation(
 				this != $r1,
@@ -53,7 +55,8 @@ end
 rule "New reservation - promote to Platinum"
 	salience 2
 	when
-		$r1: Reservation($user: user,status == Reservation.Status.PENDING)
+		$r1: Reservation($user: user,status == Reservation.Status.RESERVED)
+		$user(category == User.Category.GOLD)
 		Number(intValue >= 10) from accumulate(
 			$r2: Reservation(
 				this != $r1,

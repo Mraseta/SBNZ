@@ -3,26 +3,28 @@ import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
-export class ReserveService {
+export class AccommodationService {
 
   constructor(private http: HttpClient) { }
 
-  reserve(userId : any,
-    accommodationId : any,
-    pricePerDay : any,
-    startDate : any,
-    endDate : any) {
-    return this.http.post("http://localhost:8080/reserve/one",{
-      userId : userId,
-      accommodationId : accommodationId,
-      pricePerDay : pricePerDay,
-      startDate : startDate,
-      endDate : endDate
+  create(ownerId : any,
+    name : any,
+    country : any,
+    city : any,
+    address : any,
+    distance : any,
+    pricePerDay : any) {
+    return this.http.post("http://localhost:8080/accommodation/one",{
+      ownerId : ownerId,
+      name : name,
+      country : country,
+      city : city,
+      address : address,
+      distance : distance,
+      pricePerDay : pricePerDay
     })
       .pipe(
         map((res: any) => {
