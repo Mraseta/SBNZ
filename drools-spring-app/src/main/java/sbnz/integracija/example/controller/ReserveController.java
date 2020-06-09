@@ -1,5 +1,6 @@
 package sbnz.integracija.example.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,36 @@ public class ReserveController {
 				Reservation ret = rulesService.setReservationPrice(u, a, reservations,requestDTO.startDate,requestDTO.endDate);
 		
 				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "get-confirmed", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<?> getConfirmed(@RequestBody Id id) {
+		List<Reservation> reservations = reservationRepository.findAll();
+		List<Reservation> ret = new ArrayList<Reservation>();
+		User owner = userRepository.findOneById(id.id);
+		
+		for(Reservation r : reservations) {
+			if(r.getAccommodation().getOwner().equals(owner.getUsername()) && r.getStatus().equals(Reservation.Status.CONFIRMED)) {
+				ret.add(r);
+			}
+		}
+		
+		return new ResponseEntity<>(ret, HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "approve", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<?> approveReservation(@RequestBody Id id) {
+		Reservation r = reservationRepository.findOneById(id.id);
+		
+		r.setStatus(Reservation.Status.RESERVED);
+		
+		reservationRepository.save(r);
+		
+		return new ResponseEntity<>(r, HttpStatus.ACCEPTED);
+	}
+	
+	public static class Id {
+		public Long id;
 	}
 	
 	public static class ReserveDTO {
