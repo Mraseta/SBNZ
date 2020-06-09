@@ -6,6 +6,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import org.kie.api.KieBase;
+import org.kie.api.KieBaseConfiguration;
+import org.kie.api.KieServices;
+import org.kie.api.conf.EventProcessingOption;
 import org.drools.template.DataProvider;
 import org.drools.template.DataProviderCompiler;
 import org.drools.template.objects.ArrayDataProvider;
@@ -27,58 +32,54 @@ import sbnz.integracija.example.repository.ReservationRepository;
 import sbnz.integracija.example.repository.UserRepository;
 import sbnz.integracija.example.service.RulesService;
 
-
 @RestController
 public class RestEndpoints {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	AccommodationRepository accommodationRepository;
-	
+
 	@Autowired
 	ReservationRepository reservationRepository;
-	
+
 	@Autowired
 	RulesService rulesService;
-	
+
 	@RequestMapping(value = "/testusercat", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<?> testusercat() {
-		
-				User u = userRepository.getOne(1L);
-				User u1 = rulesService.setUserCategory(u);
-		
-				return new ResponseEntity<>(u1,HttpStatus.ACCEPTED);
-	}
-	
-	@RequestMapping(value = "/testacczone", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> testacczone() {
-		
-				List<Accommodation> accommodations = accommodationRepository.findAll();
-				List<Accommodation> ret = rulesService.setAccommodationZone(accommodations);
-		
-				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
-	}
-	
-	@RequestMapping(value = "/testaccdiscount", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<?> testaccdiscount() {
-		
-				List<Accommodation> accommodations = accommodationRepository.findAll();
-				User u = userRepository.findOneById(1L);
-				List<Accommodation> ret = rulesService.setAccommodationDiscount(u, accommodations);
-		
-				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
+
+		User u = userRepository.getOne(1L);
+		User u1 = rulesService.setUserCategory(u);
+
+		return new ResponseEntity<>(u1, HttpStatus.ACCEPTED);
 	}
 
-	@Scheduled(initialDelay = 1000,fixedRate = 1000000)
-	public void scheduleFixedRateWithInitialDelayTask() {
-	  
+	@RequestMapping(value = "/testacczone", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> testacczone() {
+
 		List<Accommodation> accommodations = accommodationRepository.findAll();
 		List<Accommodation> ret = rulesService.setAccommodationZone(accommodations);
-	    System.out.println(
-	      "Fixed rate task with one second initial delay - MRS");
+
+		return new ResponseEntity<>(ret, HttpStatus.ACCEPTED);
 	}
-	
+
+	@RequestMapping(value = "/testaccdiscount", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<?> testaccdiscount() {
+
+		List<Accommodation> accommodations = accommodationRepository.findAll();
+		User u = userRepository.findOneById(1L);
+		List<Accommodation> ret = rulesService.setAccommodationDiscount(u, accommodations);
+
+		return new ResponseEntity<>(ret, HttpStatus.ACCEPTED);
+	}
+
+	@Scheduled(initialDelay = 1000, fixedRate = 1000000)
+	public void scheduleFixedRateWithInitialDelayTask() {
+
+		List<Accommodation> accommodations = accommodationRepository.findAll();
+		List<Accommodation> ret = rulesService.setAccommodationZone(accommodations);
+		}
 
 }

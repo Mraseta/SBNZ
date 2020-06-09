@@ -17,6 +17,7 @@ import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.repository.AccommodationRepository;
 import sbnz.integracija.example.repository.ReservationRepository;
 import sbnz.integracija.example.repository.UserRepository;
+import sbnz.integracija.example.service.CepService;
 import sbnz.integracija.example.service.RulesService;
 
 @RestController
@@ -35,6 +36,9 @@ public class ReserveController {
 	@Autowired 
 	private RulesService rulesService;
 	
+	@Autowired
+	private CepService cepService;
+	
 	@RequestMapping(value = "one", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<?> reserve(@RequestBody ReserveDTO requestDTO) {
 		 
@@ -45,6 +49,8 @@ public class ReserveController {
 				a.setPricePerDay(requestDTO.pricePerDay);
 				List<Reservation> reservations = reservationRepository.findAll();
 				Reservation ret = rulesService.setReservationPrice(u, a, reservations,requestDTO.startDate,requestDTO.endDate);
+				cepService.checkReservation(ret);
+				
 		
 				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
 	}
@@ -69,7 +75,7 @@ public class ReserveController {
 		Reservation r = reservationRepository.findOneById(id.id);
 		
 		r.setStatus(Reservation.Status.RESERVED);
-		
+		r = rulesService.updateUserCategory(r);
 		reservationRepository.save(r);
 		
 		return new ResponseEntity<>(r, HttpStatus.ACCEPTED);

@@ -28,6 +28,10 @@ public class User implements Serializable{
     public enum Type {
     	USER,OWNER,ADMIN
     };
+    
+    public enum Status {
+    	ACTIVE,BLOCKED
+    }
 	
 	
 	@Id
@@ -51,6 +55,9 @@ public class User implements Serializable{
     
     @Column(name = "type")
     private Type type;
+    
+    @Column(name = "status")
+    private Status status;
     
     @JsonBackReference
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -119,6 +126,16 @@ public class User implements Serializable{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	
     
     
 }

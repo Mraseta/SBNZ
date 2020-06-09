@@ -1,11 +1,14 @@
 package sbnz.integracija.example;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +27,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class SampleApp {
 
 	private static Logger log = LoggerFactory.getLogger(SampleApp.class);
+	public static Map<String, KieSession> kieSessions = new HashMap<>();
 	
 	 
 

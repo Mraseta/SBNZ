@@ -2,66 +2,72 @@ package sbnz.cep;
 
 import sbnz.integracija.example.model.Reservation;
 import sbnz.integracija.example.model.User;
+import sbnz.integracija.example.event.ReservationEvent;
 
-rule "More than 2 reservations in 10 minutes from one client"
+rule "More than 5 reservations in 10 minutes from one client"
     when
-        $r1: Reservation($cId: user.getId(),status == Reservation.Status.PENDING)
-        Number(intValue > 2) from accumulate(
-            $r2: Reservation(
+    	$u: User(status == User.Status.ACTIVE)
+        $r1: ReservationEvent($cId: reservation.user.getId())
+        Number(intValue >=5) from accumulate(
+            $r2: ReservationEvent(
                 this != $r1, 
-                user.getId() == $cId, 
-                this meets[10m] $r1
+                reservation.user.getId() == $cId, 
+                this meets[1m] $r1
             ),
             count($r2)
         )
     then
-        System.out.println("aaaa");
+    	modify($u) {setStatus(User.Status.BLOCKED)}
+        System.out.println("aaaa doso sam ovde jer je kriticno: Status rezervacije: " + $r1.getReservation().getStatus());
 end
 
 rule "New reservation - promote to Silver"
 	salience 10
 	when
-		$r1: Reservation($user: user,status == Reservation.Status.RESERVED, $user.category == User.Category.BRONZE)
+		$r1: Reservation(status == Reservation.Status.RESERVED)
+		$u: User(category == User.Category.BRONZE)
 		Number(intValue >= 3) from accumulate(
 			$r2: Reservation(
 				this != $r1,
-				user.getId() == $user.getId()
+				user.getId() == $u.getId()
 			),
 			count($r2)
 		)
 	then
-		System.out.println("silver" + $r1.getStatus());
-		modify($user) {setCategory(User.Category.SILVER);}
+		System.out.println("silver");
+		modify($u) {setCategory(User.Category.SILVER);}
 end
 
 rule "New reservation - promote to Gold"
 	salience 5
 	when
-		$r1: Reservation($user: user,status == Reservation.Status.RESERVED,$user.category == User.Category.SILVER)
-		Number(intValue >= 5) from accumulate(
+		$r1: Reservation(status == Reservation.Status.RESERVED)
+		$u: User(category == User.Category.SILVER)
+		Number(intValue >= 6) from accumulate(
 			$r2: Reservation(
 				this != $r1,
-				user.getId() == $user.getId()
+				user.getId() == $u.getId()
 			),
 			count($r2)
 		)
 	then
 		System.out.println("gold");
-		modify($user) {setCategory(User.Category.GOLD);}
+		modify($u) {setCategory(User.Category.GOLD);}
 
 end		
 rule "New reservation - promote to Platinum"
 	salience 2
 	when
-		$r1: Reservation($user: user,status == Reservation.Status.RESERVED,$user.category == User.Category.GOLD)
+		$r1: Reservation(status == Reservation.Status.RESERVED)
+		$u: User(category == User.Category.GOLD)
 		Number(intValue >= 10) from accumulate(
 			$r2: Reservation(
 				this != $r1,
-				user.getId() == $user.getId()
+				user.getId() == $u.getId()
 			),
 			count($r2)
 		)
 	then
 		System.out.println("platinum");
-		modify($user) {setCategory(User.Category.PLATINUM);}	
+		modify($u) {setCategory(User.Category.PLATINUM);}	
 end	
