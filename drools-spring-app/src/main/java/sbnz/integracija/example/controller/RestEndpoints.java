@@ -25,7 +25,10 @@ import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.repository.AccommodationRepository;
 import sbnz.integracija.example.repository.ReservationRepository;
 import sbnz.integracija.example.repository.UserRepository;
+import sbnz.integracija.example.service.AccommodationService;
+import sbnz.integracija.example.service.ReservationService;
 import sbnz.integracija.example.service.RulesService;
+import sbnz.integracija.example.service.UserService;
 
 
 @RestController
@@ -43,11 +46,20 @@ public class RestEndpoints {
 	@Autowired
 	RulesService rulesService;
 	
+	@Autowired
+	private AccommodationService accommodationService;
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value = "/testusercat", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<?> testusercat() {
 		
 				User u = userRepository.getOne(1L);
-				User u1 = rulesService.setUserCategory(u);
+				User u1 = userService.setUserCategory(u);
 		
 				return new ResponseEntity<>(u1,HttpStatus.ACCEPTED);
 	}
@@ -56,7 +68,7 @@ public class RestEndpoints {
 	public ResponseEntity<?> testacczone() {
 		
 				List<Accommodation> accommodations = accommodationRepository.findAll();
-				List<Accommodation> ret = rulesService.setAccommodationZone(accommodations);
+				List<Accommodation> ret = accommodationService.setAccommodationZone(accommodations);
 		
 				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
 	}
@@ -66,7 +78,7 @@ public class RestEndpoints {
 		
 				List<Accommodation> accommodations = accommodationRepository.findAll();
 				User u = userRepository.findOneById(1L);
-				List<Accommodation> ret = rulesService.setAccommodationDiscount(u, accommodations);
+				List<Accommodation> ret = accommodationService.setAccommodationDiscount(u, accommodations);
 		
 				return new ResponseEntity<>(ret,HttpStatus.ACCEPTED);
 	}
@@ -75,7 +87,7 @@ public class RestEndpoints {
 	public void scheduleFixedRateWithInitialDelayTask() {
 	  
 		List<Accommodation> accommodations = accommodationRepository.findAll();
-		List<Accommodation> ret = rulesService.setAccommodationZone(accommodations);
+		List<Accommodation> ret = accommodationService.setAccommodationZone(accommodations);
 	    System.out.println(
 	      "Fixed rate task with one second initial delay - MRS");
 	}

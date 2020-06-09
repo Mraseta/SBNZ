@@ -15,7 +15,10 @@ import sbnz.integracija.example.model.Accommodation;
 import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.repository.AccommodationRepository;
 import sbnz.integracija.example.repository.UserRepository;
+import sbnz.integracija.example.service.AccommodationService;
+import sbnz.integracija.example.service.ReservationService;
 import sbnz.integracija.example.service.RulesService;
+import sbnz.integracija.example.service.UserService;
 
 @RestController
 @RequestMapping(value = "search")
@@ -28,6 +31,15 @@ public class SearchController {
 	
 	@Autowired
 	private RulesService rulesService;
+	
+	@Autowired
+	private AccommodationService accommodationService;
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
 	public ResponseEntity<?> findPatient(@RequestParam String country, @RequestParam String city,
@@ -66,7 +78,7 @@ public class SearchController {
 			}
 			accomodationsRet.add(a);
 		}
-		List<Accommodation> accomodationsWithDisc = rulesService.setAccommodationDiscount(u, accomodationsRet);
+		List<Accommodation> accomodationsWithDisc = accommodationService.setAccommodationDiscount(u, accomodationsRet);
 		return new ResponseEntity<>(accomodationsWithDisc, HttpStatus.OK);
 	}
 

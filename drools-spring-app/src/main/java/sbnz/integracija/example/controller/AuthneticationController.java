@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.repository.UserRepository;
+import sbnz.integracija.example.service.AccommodationService;
+import sbnz.integracija.example.service.ReservationService;
 import sbnz.integracija.example.service.RulesService;
+import sbnz.integracija.example.service.UserService;
 
 @RestController
 @RequestMapping(value = "auth")
@@ -22,6 +25,15 @@ public class AuthneticationController {
 	@Autowired
 	RulesService rulesService;
 	
+	@Autowired
+	private AccommodationService accommodationService;
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST,consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> testusercat(@RequestBody UserDTO user) {
 			User u = userRepository.findOneByUsername(user.username);
@@ -32,7 +44,7 @@ public class AuthneticationController {
 				return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST); 
 				
 			}else {
-				User u1 = rulesService.setUserCategory(u);
+				User u1 = userService.setUserCategory(u);
 				return new ResponseEntity<>(u1,HttpStatus.ACCEPTED);
 			}
 		
