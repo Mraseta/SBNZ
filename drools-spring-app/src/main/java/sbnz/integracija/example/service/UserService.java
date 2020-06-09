@@ -43,5 +43,22 @@ private final KieContainer kieContainer;
 		userRepository.save(u);
 		return u;
 	}
+	public Reservation updateUserCategory(Reservation r) {
+		KieSession kieSession = kieContainer.newKieSession();
+		User u = userRepository.getOne(r.getUser().getId());
+		kieSession.insert(u);
+		List<Reservation> reservations = reservationRepository.findAll();
+		for (Reservation rr : reservations) {
+			kieSession.insert(rr);
+			
+		}
+		kieSession.insert(r);
+		
+		kieSession.fireAllRules();
+		kieSession.dispose();
+		userRepository.save(u);
+		return reservationRepository.save(r);
+
+	}
 
 }

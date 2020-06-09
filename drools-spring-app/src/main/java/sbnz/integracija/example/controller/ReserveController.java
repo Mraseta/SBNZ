@@ -88,7 +88,7 @@ public class ReserveController {
 		Reservation r = reservationRepository.findOneById(id.id);
 		
 		r.setStatus(Reservation.Status.RESERVED);
-		r = rulesService.updateUserCategory(r);
+		r = userService.updateUserCategory(r);
 		reservationRepository.save(r);
 		
 		return new ResponseEntity<>(r, HttpStatus.ACCEPTED);
