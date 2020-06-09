@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import sbnz.integracija.example.model.Accommodation;
 import sbnz.integracija.example.repository.AccommodationRepository;
 import sbnz.integracija.example.repository.UserRepository;
+import sbnz.integracija.example.service.AccommodationService;
+import sbnz.integracija.example.service.ReservationService;
 import sbnz.integracija.example.service.RulesService;
+import sbnz.integracija.example.service.UserService;
 
 @RestController
 @RequestMapping(value = "accommodation")
@@ -28,6 +31,15 @@ public class AccommodationController {
 	
 	@Autowired 
 	private RulesService rulesService;
+	
+	@Autowired
+	private AccommodationService accommodationService;
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	@Autowired
+	private UserService userService;
 	
 	
 	
@@ -43,7 +55,7 @@ public class AccommodationController {
 				a.setPricePerDay(requestDTO.pricePerDay);
 				a.setOwner(userRepository.getOne(requestDTO.ownerId).getUsername());
 				a.setZone(Accommodation.Zone.NA);
-				a = rulesService.setAccommodationZone(a);
+				a = accommodationService.setAccommodationZone(a);
 				return new ResponseEntity<>(a,HttpStatus.CREATED);
 	}
 	private static class AccommodationDTO {
