@@ -110,6 +110,7 @@ public class RulesService {
 		for(Reservation rr : reservations) {
 			if(rr.getAccommodation().getOwner().equals(a.getOwner())) {
 				i++;
+				kieSession.insert(rr);
 				
 			}
 		}
