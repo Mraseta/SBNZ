@@ -36,7 +36,7 @@ public class CEPBlockUserTest {
 		kSession = kieBase.newKieSession(kconfig1, null);
 	}
 	
-	@Test
+	//@Test
 	public void blockUserTest() {
 		User u = new User();
 		u.setStatus(User.Status.ACTIVE);
@@ -64,7 +64,7 @@ public class CEPBlockUserTest {
 		assertEquals(User.Status.BLOCKED, u.getStatus());
 	}
 	
-	@Test
+	//@Test
 	public void notBlockedUserTest() {
 		initKSession();
 		User u = new User();

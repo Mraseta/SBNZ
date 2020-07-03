@@ -23,7 +23,7 @@ public class UserCategoryTest {
         kieContainer = ks.newKieClasspathContainer();
     }
 	
-	@Test
+	//@Test
 	public void testUserCategorySilver() {
 		kSession = kieContainer.newKieSession();
 		//3
@@ -59,7 +59,7 @@ public class UserCategoryTest {
 		assertEquals(User.Category.SILVER, u.getCategory());
 	}
 	
-	@Test
+	//@Test
 	public void testUserCategoryGold() {
 		kSession = kieContainer.newKieSession();
 		//6
@@ -112,7 +112,7 @@ public class UserCategoryTest {
 		assertEquals(User.Category.GOLD, u.getCategory());
 	}
 	
-	@Test
+	//@Test
 	public void testUserCategoryPlatinum() {
 		kSession = kieContainer.newKieSession();
 		//10

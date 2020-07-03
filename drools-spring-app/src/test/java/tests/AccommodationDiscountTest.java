@@ -22,7 +22,7 @@ public class AccommodationDiscountTest {
         kieContainer = ks.newKieClasspathContainer();
 	}
 	
-	@Test
+	//@Test
 	public void testDiscountSilver() {
 		kSession = kieContainer.newKieSession();
 		
@@ -43,7 +43,7 @@ public class AccommodationDiscountTest {
 		assertEquals(a.getPricePerDay(), 0.97*startPrice, 0.01);
 	}
 	
-	@Test
+	//@Test
 	public void testDiscountGold() {
 		kSession = kieContainer.newKieSession();
 		
@@ -64,7 +64,7 @@ public class AccommodationDiscountTest {
 		assertEquals(a.getPricePerDay(), 0.95*startPrice, 0.01);
 	}
 	
-	@Test
+	//@Test
 	public void testDiscountPlatinum() {
 		kSession = kieContainer.newKieSession();
 		

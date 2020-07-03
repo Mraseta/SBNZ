@@ -6,7 +6,7 @@ rule "Categorize Users_PLATINUM"
 salience 50/User.Category.PLATINUM.getValue()
 when
 	$u: User(category.getValue() == User.Category.PLATINUM.getValue()-1)
-        Number(intValue >= 5) from accumulate(
+        Number(intValue >= 20) from accumulate(
 			$r2: Reservation(
 				user.getId() == $u.getId(),
 				status == Reservation.Status.RESERVED
@@ -21,7 +21,7 @@ rule "Categorize Users_GOLD"
 salience 50/User.Category.GOLD.getValue()
 when
 	$u: User(category.getValue() == User.Category.GOLD.getValue()-1)
-        Number(intValue >= 4) from accumulate(
+        Number(intValue >= 10) from accumulate(
 			$r2: Reservation(
 				user.getId() == $u.getId(),
 				status == Reservation.Status.RESERVED
@@ -36,7 +36,7 @@ rule "Categorize Users_SILVER"
 salience 50/User.Category.SILVER.getValue()
 when
 	$u: User(category.getValue() == User.Category.SILVER.getValue()-1)
-        Number(intValue >= 3) from accumulate(
+        Number(intValue >= 5) from accumulate(
 			$r2: Reservation(
 				user.getId() == $u.getId(),
 				status == Reservation.Status.RESERVED

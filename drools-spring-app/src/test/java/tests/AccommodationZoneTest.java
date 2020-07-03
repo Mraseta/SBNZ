@@ -22,7 +22,7 @@ public class AccommodationZoneTest {
         kieContainer = ks.newKieClasspathContainer();
 	}
 	
-	@Test
+	//@Test
 	public void testZoneCenter() {
 		kSession = kieContainer.newKieSession();
 		
@@ -38,7 +38,7 @@ public class AccommodationZoneTest {
 		assertEquals(Accommodation.Zone.CENTER, a.getZone());
 	}
 	
-	@Test
+	//@Test
 	public void testZoneNormal() {
 		kSession = kieContainer.newKieSession();
 		
@@ -54,7 +54,7 @@ public class AccommodationZoneTest {
 		assertEquals(Accommodation.Zone.NORMAL, a.getZone());
 	}
 	
-	@Test
+	//@Test
 	public void testZoneSuburbs() {
 		kSession = kieContainer.newKieSession();
 		

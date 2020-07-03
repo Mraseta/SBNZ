@@ -59,7 +59,7 @@ private final KieContainer kieContainer;
 		kieSession.insert(r);
 		int i = 0;
 		for (Reservation rr : reservations) {
-			if (rr.getAccommodation().getOwner().equals(a.getOwner())) {
+			if (rr.getAccommodation().getOwner().equals(a.getOwner()) && rr.getStatus().equals(Reservation.Status.RESERVED)) {
 				i++;
 				kieSession.insert(rr);
 
