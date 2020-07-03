@@ -17,6 +17,7 @@ import org.kie.api.runtime.conf.ClockTypeOption;
 import sbnz.integracija.example.event.ReservationEvent;
 import sbnz.integracija.example.model.Reservation;
 import sbnz.integracija.example.model.User;
+import sbnz.integracija.example.model.User.Category;
 
 public class CEPBlockUserTest {
 
@@ -39,6 +40,7 @@ public class CEPBlockUserTest {
 	public void blockUserTest() {
 		User u = new User();
 		u.setStatus(User.Status.ACTIVE);
+		u.setCategory(Category.BRONZE);
 		
 		Reservation r = new Reservation();
 		r.setUser(u);
@@ -67,6 +69,7 @@ public class CEPBlockUserTest {
 		initKSession();
 		User u = new User();
 		u.setStatus(User.Status.ACTIVE);
+		u.setCategory(Category.BRONZE);
 		
 		Reservation r = new Reservation();
 		r.setUser(u);

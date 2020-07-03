@@ -26,7 +26,7 @@ public class UserCategoryTest {
 	@Test
 	public void testUserCategorySilver() {
 		kSession = kieContainer.newKieSession();
-		
+		//3
 		User u = new User();
 		u.setCategory(User.Category.BRONZE);
 		
@@ -62,7 +62,7 @@ public class UserCategoryTest {
 	@Test
 	public void testUserCategoryGold() {
 		kSession = kieContainer.newKieSession();
-		
+		//6
 		User u = new User();
 		u.setCategory(User.Category.BRONZE);
 		
@@ -115,7 +115,7 @@ public class UserCategoryTest {
 	@Test
 	public void testUserCategoryPlatinum() {
 		kSession = kieContainer.newKieSession();
-		
+		//10
 		User u = new User();
 		u.setCategory(User.Category.BRONZE);
 		

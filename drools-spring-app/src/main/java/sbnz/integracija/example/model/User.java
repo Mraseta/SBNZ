@@ -22,7 +22,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class User implements Serializable{
 	
 	public enum Category {
-        BRONZE,SILVER,GOLD,PLATINUM
+        BRONZE(0),SILVER(1),GOLD(2),PLATINUM(3);
+        
+        private final int value;
+        private Category(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     };
     
     public enum Type {

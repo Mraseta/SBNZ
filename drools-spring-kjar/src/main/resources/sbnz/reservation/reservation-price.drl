@@ -9,6 +9,7 @@ import java.util.*;
 global Integer visits;
 
 rule "calculate price based on duration of reservation"
+	salience 100
 	agenda-group "reservation-price"
 	when
         $r: Reservation(status == Reservation.Status.PENDING,start : startDate.getDayOfYear(), endd : endDate.getDayOfYear())
@@ -20,9 +21,10 @@ rule "calculate price based on duration of reservation"
 end
 
 rule "calculate discount based on number of stays at this particular owner if stays are more than 3 and less than 7 and apply 5% discount"
+	salience 100/visits
 	agenda-group "reservation-price"
 	when
-		$r: Reservation($totalPrice : totalPrice) @Watch(!*,status)
+		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED) @Watch(!*,status)
 		$a: Accommodation($owner : owner)
 		$reservations: List() from collect (Reservation( accommodation.owner == $a.owner ))
 		eval(visits >= 3)
@@ -33,8 +35,9 @@ end
 
 rule "calculate discount based on number of stays at this particular owner if stays are more than 7 and less than 10 and apply 10% discount"
 	agenda-group "reservation-price"
+	salience 100/visits
 	when
-		$r: Reservation($totalPrice : totalPrice) @Watch(!*,status)
+		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED) @Watch(!*,status)
 		$a: Accommodation($owner : owner)
 		$reservations: List() from collect (Reservation( accommodation.owner == $a.owner ))
 		eval(visits >= 7)
@@ -44,9 +47,10 @@ rule "calculate discount based on number of stays at this particular owner if st
 end
 
 rule "calculate discount based on number of stays at this particular owner if stays are more than 10 apply 15% discount"
+	salience 100/visits
 	agenda-group "reservation-price"
 	when
-		$r: Reservation($totalPrice : totalPrice) @Watch(!*,status)
+		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED) @Watch(!*,status)
 		$a: Accommodation($owner : owner)
 		$reservations: List() from collect (Reservation( accommodation.owner == $a.owner ))
 		eval(visits >= 10)

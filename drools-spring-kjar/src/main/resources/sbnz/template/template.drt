@@ -11,9 +11,9 @@ import sbnz.integracija.example.model.Reservation;
 template "user-category-rules"
 
 rule "Categorize Users_@{newCategory}"
-salience @{newSal}
+salience 50/User.Category.@{newCategory}.getValue()
 when
-	$u: User(category != User.Category.@{newCategory})
+	$u: User(category.getValue() == User.Category.@{newCategory}.getValue()-1)
         Number(intValue >= @{minRes}) from accumulate(
 			$r2: Reservation(
 				user.getId() == $u.getId(),
