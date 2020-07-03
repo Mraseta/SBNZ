@@ -69,23 +69,26 @@ public class NewRuleController {
             e.printStackTrace();
         }
         
+        String s = System.getProperty("user.dir").replace("drools-spring-app", "drools-spring-kjar") + "\\pom.xml";
+        System.out.println(s);
+        /*
         InvocationRequest request = new DefaultInvocationRequest();
 		request.setPomFile(new File(
 				System.getProperty("user.dir").replace("drools-spring-app", "drools-spring-kjar") + "\\pom.xml"));
 		request.setGoals(Collections.singletonList("install"));
 
 		Invoker invoker = new DefaultInvoker();
-
 		try {
 			invoker.execute(request);
 		} catch (MavenInvocationException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		ArrayList<User> users = (ArrayList<User>) userRepository.findAll();
 		
 		for(User u : users) {
 			userService.updateUserCategory(u);
+			System.out.println(u.getCategory());
 		}
 		
 		return new ResponseEntity<>(ret, HttpStatus.ACCEPTED);

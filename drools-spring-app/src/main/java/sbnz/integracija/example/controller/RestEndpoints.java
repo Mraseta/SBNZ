@@ -88,8 +88,12 @@ public class RestEndpoints {
 	  
 		List<Accommodation> accommodations = accommodationRepository.findAll();
 		List<Accommodation> ret = accommodationService.setAccommodationZone(accommodations);
+		List<User> users = userRepository.findAll();
+		for(User u : users) {
+			userService.setUserCategory(u);
+		}
 	    System.out.println(
-	      "Fixed rate task with one second initial delay - MRS");
+	      ">>Postavljanje accommodation zona svim accomodationima pri starovanju servera, i postavljanje adekvatnih user kategorija");
 	}
 	
 
