@@ -1,14 +1,41 @@
 package sbnz.user;
-
-
 import sbnz.integracija.example.model.User;
 import sbnz.integracija.example.model.Reservation;
 
-rule "Promote user to silver"
-	agenda-group "user-category"
-	salience 20
-    when
-        $u: User(category == User.Category.BRONZE)
+rule "Categorize Users_PLATINUM"
+salience 50/User.Category.PLATINUM.getValue()
+when
+	$u: User(category.getValue() == User.Category.PLATINUM.getValue()-1)
+        Number(intValue >= 5) from accumulate(
+			$r2: Reservation(
+				user.getId() == $u.getId(),
+				status == Reservation.Status.RESERVED
+			),
+			count($r2)
+		)
+then
+	modify ($u){ setCategory(User.Category.PLATINUM)};
+end
+
+rule "Categorize Users_GOLD"
+salience 50/User.Category.GOLD.getValue()
+when
+	$u: User(category.getValue() == User.Category.GOLD.getValue()-1)
+        Number(intValue >= 4) from accumulate(
+			$r2: Reservation(
+				user.getId() == $u.getId(),
+				status == Reservation.Status.RESERVED
+			),
+			count($r2)
+		)
+then
+	modify ($u){ setCategory(User.Category.GOLD)};
+end
+
+rule "Categorize Users_SILVER"
+salience 50/User.Category.SILVER.getValue()
+when
+	$u: User(category.getValue() == User.Category.SILVER.getValue()-1)
         Number(intValue >= 3) from accumulate(
 			$r2: Reservation(
 				user.getId() == $u.getId(),
@@ -16,38 +43,8 @@ rule "Promote user to silver"
 			),
 			count($r2)
 		)
-    then
-        modify($u) {setCategory(User.Category.SILVER);}
+then
+	modify ($u){ setCategory(User.Category.SILVER)};
 end
 
-rule "Promote user to gold"
-	agenda-group "user-category"
-	salience 15
-    when
-        $u: User(category == User.Category.SILVER)
-         Number(intValue >= 6) from accumulate(
-			$r2: Reservation(
-				user.getId() == $u.getId(),
-				status == Reservation.Status.RESERVED
-			),
-			count($r2)
-		)
-    then
-        modify($u) {setCategory(User.Category.GOLD);}
-end
 
-rule "Promote user to platinum"
-	agenda-group "user-category"
-	salience 10
-    when
-        $u: User(category == User.Category.GOLD)
-         Number(intValue >= 10) from accumulate(
-			$r2: Reservation(
-				user.getId() == $u.getId(),
-				status == Reservation.Status.RESERVED
-			),
-			count($r2)
-		)
-    then
-        modify($u) {setCategory(User.Category.PLATINUM);}
-end
