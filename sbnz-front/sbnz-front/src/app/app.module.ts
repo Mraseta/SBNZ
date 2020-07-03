@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateAccommodationComponent } from './create-accommodation/create-accommodation.component';
 import { ApproveReservationsComponent } from './approve-reservations/approve-reservations.component';
 import { NewRuleComponent } from './new-rule/new-rule.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { NewRuleComponent } from './new-rule/new-rule.component';
     RegisterComponent,
     CreateAccommodationComponent,
     ApproveReservationsComponent,
-    NewRuleComponent
+    NewRuleComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
