@@ -1,0 +1,30 @@
+template header
+minRes
+newSal
+newCategory
+
+package sbnz.cep;
+
+import sbnz.integracija.example.model.User;
+import sbnz.integracija.example.model.Reservation;
+
+template "reevaluate-category-rules"
+
+rule "New reservation - promote to @{newCategory}"
+salience 50/User.Category.@{newCategory}.getValue()
+when
+		$r1: Reservation(status == Reservation.Status.RESERVED)
+		$u: User(category.getValue() == User.Category.@{newCategory}.getValue()-1)
+		Number(intValue >= @{minRes}) from accumulate(
+			$r2: Reservation(
+				this != $r1,
+				status.getValue() == 2,
+				user.getId() == $u.getId()
+			),
+			count($r2)
+		)
+	then
+		modify($u) {setCategory(User.Category.@{newCategory});}
+end
+
+end template

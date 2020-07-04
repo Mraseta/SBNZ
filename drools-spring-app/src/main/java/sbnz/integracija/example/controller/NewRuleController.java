@@ -49,6 +49,14 @@ public class NewRuleController {
             new String[]{newRule.strings[6], newRule.strings[7], newRule.strings[8], newRule.strings[8]},
         });
         
+        InputStream template2 = RestEndpoints.class.getResourceAsStream("/sbnz/template/reevaluate-category-template.drt");
+        
+        DataProvider dataProvider2 = new ArrayDataProvider(new String[][]{
+            new String[]{newRule.strings[0], newRule.strings[1], newRule.strings[2], newRule.strings[2]},
+            new String[]{newRule.strings[3], newRule.strings[4], newRule.strings[5], newRule.strings[5]},
+            new String[]{newRule.strings[6], newRule.strings[7], newRule.strings[8], newRule.strings[8]},
+        });
+        
         DataProviderCompiler converter = new DataProviderCompiler();
         String drl = converter.compile(dataProvider, template);
         
@@ -69,6 +77,28 @@ public class NewRuleController {
             e.printStackTrace();
         }
         
+        
+        
+        DataProviderCompiler converter2 = new DataProviderCompiler();
+        String drl2 = converter2.compile(dataProvider2, template2);
+        
+        System.out.println(drl2);
+        
+        try {
+        	String s = System.getProperty("user.dir");
+        	s =  s.substring(0, s.length()-17);
+            System.out.println(s + "drools-spring-kjar\\src\\main\\resources\\sbnz\\cep\\reevaluate-user-category.drl");
+            File f = new File(s + "drools-spring-kjar\\src\\main\\resources\\sbnz\\cep\\reevaluate-user-category.drl");
+            FileWriter fileWriter = null;
+            fileWriter = new FileWriter(f, false);
+            
+            fileWriter.write(drl2);
+            fileWriter.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         String s = System.getProperty("user.dir").replace("drools-spring-app", "drools-spring-kjar") + "\\pom.xml";
         System.out.println(s);
         InvocationRequest request = new DefaultInvocationRequest();
@@ -77,7 +107,8 @@ public class NewRuleController {
 		request.setGoals(Collections.singletonList("install"));
 
 		Invoker invoker = new DefaultInvoker();
-		invoker.setMavenHome(new File("D:\\okruzenja\\apache-maven-3.6.3"));
+		//invoker.setMavenHome(new File("D:\\okruzenja\\apache-maven-3.6.3"));
+		invoker.setMavenHome(new File("C:\\Program Files\\apache-maven-3.6.3"));
 		try {
 			invoker.execute(request);
 		} catch (MavenInvocationException e) {
