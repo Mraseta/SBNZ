@@ -9,22 +9,22 @@ import java.util.*;
 global Integer visits;
 
 rule "calculate price based on duration of reservation"
-	salience 110
+	salience 100
 	agenda-group "reservation-price"
 	when
         $r: Reservation(status == Reservation.Status.PENDING,start : startDate.getDayOfYear(), endd : endDate.getDayOfYear())
         $a: Accommodation(price : pricePerDay)
     then
-        System.out.println("dosao");
+        System.out.println("dosao da racunam ukupnu cenu");
         modify($r){setTotalPrice((endd-start)*price);}
         modify($r){setStatus(Reservation.Status.CONFIRMED);}
 end
 
 rule "calculate discount based on number of stays at this particular owner if stays are more than 3 and less than 7 and apply 5% discount"
-	salience 100
+	salience 90
 	agenda-group "reservation-price"
 	when
-		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED, $user : user) @Watch(!*,status)
+		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED, $user : user)
 		$a: Accommodation($owner : owner)
 		$rezervacije : Set() from collect(Reservation(status == Reservation.Status.RESERVED) from $user.getReservations())
 		$numOfUniqueVisits: Set() from accumulate (
@@ -38,15 +38,17 @@ rule "calculate discount based on number of stays at this particular owner if st
 		eval($numOfUniqueVisits.size() >= 3)
 		eval($numOfUniqueVisits.size() < 7)
 	then
-		System.out.println("3 do 7");
+		System.out.println("3 do 7: Broj poseta:" + $numOfUniqueVisits.size());
 		modify($r){setTotalPrice($totalPrice*0.95)}
+		drools.halt();
+		
 end
 
 rule "calculate discount based on number of stays at this particular owner if stays are more than 7 and less than 10 and apply 10% discount"
 	agenda-group "reservation-price"
-	salience 100/visits
+	salience 50
 	when
-		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED,$user : user) @Watch(!*,status)
+		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED,$user : user)
 		$a: Accommodation($owner : owner)
 		$rezervacije : Set() from collect(Reservation(status == Reservation.Status.RESERVED) from $user.getReservations())
 		$numOfUniqueVisits: Set() from accumulate (
@@ -64,13 +66,14 @@ rule "calculate discount based on number of stays at this particular owner if st
 	then
 		System.out.println("7 do 10");
 		modify($r){setTotalPrice($totalPrice*0.90)}
+		drools.halt();
 end
 
 rule "calculate discount based on number of stays at this particular owner if stays are more than 10 apply 15% discount"
-	salience 100/visits
+	salience 40
 	agenda-group "reservation-price"
 	when
-		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED, $user : user) @Watch(!*,status)
+		$r: Reservation($totalPrice : totalPrice,status == Reservation.Status.CONFIRMED, $user : user)
 		$a: Accommodation($owner : owner)
 		$rezervacije : Set() from collect(Reservation(status == Reservation.Status.RESERVED) from $user.getReservations())
 		$numOfUniqueVisits: Set() from accumulate (
@@ -87,4 +90,5 @@ rule "calculate discount based on number of stays at this particular owner if st
 	then
 		System.out.println("preko 10"); 
 		modify($r){setTotalPrice($totalPrice*0.85)}
+		drools.halt();
 end

@@ -12,6 +12,7 @@ template "user-category-rules"
 
 rule "Categorize Users_@{newCategory}"
 salience 50/User.Category.@{newCategory}.getValue()
+agenda-group "user-category"
 when
 	$u: User(category.getValue() == User.Category.@{newCategory}.getValue()-1)
         Number(intValue >= @{minRes}) from accumulate(

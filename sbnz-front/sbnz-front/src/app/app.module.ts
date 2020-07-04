@@ -13,6 +13,7 @@ import { CreateAccommodationComponent } from './create-accommodation/create-acco
 import { ApproveReservationsComponent } from './approve-reservations/approve-reservations.component';
 import { NewRuleComponent } from './new-rule/new-rule.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ReserveConfirmedComponent } from './reserve-confirmed/reserve-confirmed.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     CreateAccommodationComponent,
     ApproveReservationsComponent,
     NewRuleComponent,
-    NavBarComponent
+    NavBarComponent,
+    ReserveConfirmedComponent
   ],
   imports: [
     BrowserModule,
