@@ -57,6 +57,9 @@ public class ReserveController {
 		 
 				List<Accommodation> accommodations = accommodationRepository.findAll();
 				User u = userRepository.findOneById(requestDTO.userId);
+				if(u.getStatus().equals(User.Status.BLOCKED)) {
+					return new ResponseEntity<>("ne mozete da rezervisete blokirani ste",HttpStatus.BAD_REQUEST);
+				}
 				
 				Accommodation a = accommodationRepository.findOneById(requestDTO.accommodationId);
 				a.setPricePerDay(requestDTO.pricePerDay);

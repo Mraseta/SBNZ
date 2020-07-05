@@ -7,7 +7,7 @@ salience 50/User.Category.PLATINUM.getValue()
 when
 		$r1: Reservation(status == Reservation.Status.RESERVED)
 		$u: User(category.getValue() == User.Category.PLATINUM.getValue()-1)
-		Number(intValue >= 4) from accumulate(
+		Number(intValue >= 15) from accumulate(
 			$r2: Reservation(
 				this != $r1,
 				status.getValue() == 2,
@@ -24,7 +24,7 @@ salience 50/User.Category.GOLD.getValue()
 when
 		$r1: Reservation(status == Reservation.Status.RESERVED)
 		$u: User(category.getValue() == User.Category.GOLD.getValue()-1)
-		Number(intValue >= 3) from accumulate(
+		Number(intValue >= 10) from accumulate(
 			$r2: Reservation(
 				this != $r1,
 				status.getValue() == 2,
@@ -41,7 +41,7 @@ salience 50/User.Category.SILVER.getValue()
 when
 		$r1: Reservation(status == Reservation.Status.RESERVED)
 		$u: User(category.getValue() == User.Category.SILVER.getValue()-1)
-		Number(intValue >= 2) from accumulate(
+		Number(intValue >= 5) from accumulate(
 			$r2: Reservation(
 				this != $r1,
 				status.getValue() == 2,

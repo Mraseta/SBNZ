@@ -22,11 +22,13 @@ export class HomeComponent implements OnInit {
   reserveWanted = false;
   accommodationId : any;
   accommodationPrice : any;
+  finished : any;
 
   hoveredDate: NgbDate;
 
   fromDate: NgbDate;
   toDate: NgbDate;
+  reservation : any;
 
 
   zones = [
@@ -68,9 +70,11 @@ export class HomeComponent implements OnInit {
     console.log(this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day);
     this.reserveService.reserve(this.id,this.accommodationId,this.accommodationPrice,start,end).subscribe(
       (data : any) => {
-        console.log(data);
+        this.reservation = data;
+        this.finished = true;
+        console.log(this.reservation)
       }, (error) => {
-        console.log(error);
+        alert(error.error);
       }
     )
     

@@ -62,6 +62,7 @@ public class AuthneticationController {
 		u.setFirstName(user.firstName);
 		u.setLastName(user.lastName);
 		u.setCategory(User.Category.BRONZE);
+		u.setStatus(User.Status.ACTIVE);
 		u.setType(User.Type.USER);
 		userRepository.save(u);
 		return new ResponseEntity<>(u,HttpStatus.CREATED);

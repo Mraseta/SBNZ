@@ -59,4 +59,7 @@
     </div>
     <button type="submit" class="btn btn-primary posalji">Posalji zahtev</button>
 </form>
+<div>
+  <h3 *ngIf="finished">Ukupna cena vaseg aranzmana: <strong>{{reservation.totalPrice}}</strong> i trenutno stanje vaseg zahteva je CONFIRMED sacekajte da administrator potvrdi da bi ste mogli da koristite vasu rezervaciju</h3>
+</div>
 </div>
